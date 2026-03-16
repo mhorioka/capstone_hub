@@ -97,4 +97,5 @@ export type ProjectAction =
   // ── Internal (autosave lifecycle) ────────────────────────
   | { type: 'MARK_SAVING' }
   | { type: 'MARK_SAVED' }
-  | { type: 'MARK_SAVE_ERROR'; payload: { message: string } };
+  | { type: 'MARK_SAVE_ERROR'; payload: { message: string } }
+  | { type: 'MARK_IDLE' };

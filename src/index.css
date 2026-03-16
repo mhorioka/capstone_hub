@@ -1,0 +1,44 @@
+@import "tailwindcss";
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    font-family: system-ui, "Segoe UI", Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: #f8fafc;
+    color: #0f172a;
+  }
+
+  #root {
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+/* Print styles */
+@media print {
+  nav,
+  aside,
+  .no-print {
+    display: none !important;
+  }
+
+  .print-section {
+    page-break-before: always;
+  }
+
+  .print-section:first-child {
+    page-break-before: auto;
+  }
+
+  body {
+    background: white;
+    color: black;
+  }
+}
