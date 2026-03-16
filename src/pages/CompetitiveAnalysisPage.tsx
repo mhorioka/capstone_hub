@@ -87,7 +87,7 @@ function CompetitorSection() {
             </div>
             <div className="flex justify-end gap-2">
               <Button variant="outline" size="sm" onClick={() => setAdding(false)}>{t('common.cancel')}</Button>
-              <Button size="sm" onClick={handleAdd}>{t('common.add')}</Button>
+              <Button size="sm" onClick={handleAdd} disabled={!form.name.trim()}>{t('common.add')}</Button>
             </div>
           </div>
         )}

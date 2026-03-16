@@ -1,6 +1,6 @@
-import { NavLink, useParams } from 'react-router-dom'
+import { NavLink, Link, useParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import { LayoutDashboard, TrendingUp, BarChart3, Target, FileText } from 'lucide-react'
+import { LayoutDashboard, TrendingUp, BarChart3, Target, FileText, ChevronLeft } from 'lucide-react'
 import { StatusBadge } from '@/components/common/StatusBadge'
 import { cn } from '@/lib/utils'
 import type { SectionStatus } from '@/types/models'
@@ -56,6 +56,14 @@ export function Sidebar({ marketStatus, competitiveStatus, gtmStatus }: SidebarP
   return (
     <aside className="w-60 shrink-0 border-r border-slate-200 bg-white no-print">
       <nav className="flex flex-col gap-1 p-3">
+        <Link
+          to="/"
+          className="flex items-center gap-2 rounded-md px-3 py-2 text-sm text-slate-500 hover:bg-slate-50 hover:text-slate-900 transition-colors mb-1"
+        >
+          <ChevronLeft className="h-4 w-4" />
+          {t('nav.projects')}
+        </Link>
+        <hr className="border-slate-200 mb-1" />
         {navItems.map((item) => (
           <NavLink
             key={item.to}
