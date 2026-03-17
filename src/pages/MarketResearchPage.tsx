@@ -131,7 +131,7 @@ function SegmentsSection() {
               <Button variant="outline" size="sm" onClick={() => { setAdding(false); setError('') }}>
                 {t('common.cancel')}
               </Button>
-              <Button size="sm" onClick={handleAdd}>{t('common.add')}</Button>
+              <Button size="sm" onClick={handleAdd} disabled={!form.name.trim()}>{t('common.add')}</Button>
             </div>
           </div>
         )}
@@ -269,7 +269,7 @@ function ConsumerInsightsSection() {
             </div>
             <div className="flex justify-end gap-2">
               <Button variant="outline" size="sm" onClick={() => setAdding(false)}>{t('common.cancel')}</Button>
-              <Button size="sm" onClick={handleAdd}>{t('common.add')}</Button>
+              <Button size="sm" onClick={handleAdd} disabled={!form.source.trim() || !form.notes.trim()}>{t('common.add')}</Button>
             </div>
           </div>
         )}
@@ -389,7 +389,7 @@ function BarriersSection() {
             </div>
             <div className="flex justify-end gap-2">
               <Button variant="outline" size="sm" onClick={() => setAdding(false)}>{t('common.cancel')}</Button>
-              <Button size="sm" onClick={handleAdd}>{t('common.add')}</Button>
+              <Button size="sm" onClick={handleAdd} disabled={!form.description.trim()}>{t('common.add')}</Button>
             </div>
           </div>
         )}
@@ -473,7 +473,7 @@ function TrendsSection() {
             </div>
             <div className="flex justify-end gap-2">
               <Button variant="outline" size="sm" onClick={() => setAdding(false)}>{t('common.cancel')}</Button>
-              <Button size="sm" onClick={handleAdd}>{t('common.add')}</Button>
+              <Button size="sm" onClick={handleAdd} disabled={!form.title.trim()}>{t('common.add')}</Button>
             </div>
           </div>
         )}
