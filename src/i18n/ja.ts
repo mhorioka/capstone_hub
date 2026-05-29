@@ -210,6 +210,9 @@ export const ja = {
       endDate: '終了日',
       goals: '目標',
       goalsPlaceholder: 'このフェーズの目標を入力してください',
+      dateError: '終了日は開始日以降に設定してください',
+      duplicateTitle: 'Phase {{number}} 重複',
+      duplicateDescription: 'Phase {{number}} は既に存在します。上書きしますか？',
     },
     kpis: {
       title: 'KPI',

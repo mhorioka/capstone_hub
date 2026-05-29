@@ -212,6 +212,9 @@ export const en: Translations = {
       endDate: 'End Date',
       goals: 'Goals',
       goalsPlaceholder: 'Enter the goals for this phase',
+      dateError: 'End date must be on or after the start date',
+      duplicateTitle: 'Phase {{number}} Duplicate',
+      duplicateDescription: 'Phase {{number}} already exists. Do you want to overwrite it?',
     },
     kpis: {
       title: 'KPIs',

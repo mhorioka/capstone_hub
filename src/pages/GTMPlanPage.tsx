@@ -70,7 +70,7 @@ function PersonasSection() {
               </div>
             </div>
             <div className="flex justify-end gap-2">
-              <Button variant="outline" size="sm" onClick={() => setAdding(false)}>{t('common.cancel')}</Button>
+              <Button variant="outline" size="sm" onClick={() => { setAdding(false); setError('') }}>{t('common.cancel')}</Button>
               <Button size="sm" onClick={handleAdd} disabled={!form.name.trim()}>{t('common.add')}</Button>
             </div>
           </div>
@@ -219,7 +219,7 @@ function InitiativesSection() {
               </div>
             </div>
             <div className="flex justify-end gap-2">
-              <Button variant="outline" size="sm" onClick={() => setAdding(false)}>{t('common.cancel')}</Button>
+              <Button variant="outline" size="sm" onClick={() => { setAdding(false); setError('') }}>{t('common.cancel')}</Button>
               <Button size="sm" onClick={handleAdd} disabled={!form.title.trim()}>{t('common.add')}</Button>
             </div>
           </div>
@@ -294,7 +294,7 @@ function PhasesSection() {
   function validate() {
     const newErrors = {
       milestone: !form.milestone.trim() ? t('common.required') : '',
-      date: form.startDate && form.endDate && form.endDate < form.startDate ? '終了日は開始日以降に設定してください' : '',
+      date: form.startDate && form.endDate && form.endDate < form.startDate ? t('gtm.phases.dateError') : '',
     }
     setErrors(newErrors)
     return !newErrors.milestone && !newErrors.date
@@ -375,7 +375,7 @@ function PhasesSection() {
               </div>
             </div>
             <div className="flex justify-end gap-2">
-              <Button variant="outline" size="sm" onClick={() => setAdding(false)}>{t('common.cancel')}</Button>
+              <Button variant="outline" size="sm" onClick={() => { setAdding(false); setErrors({ milestone: '', date: '' }) }}>{t('common.cancel')}</Button>
               <Button size="sm" onClick={handleAdd} disabled={!form.milestone.trim()}>{t('common.add')}</Button>
             </div>
           </div>
@@ -420,8 +420,8 @@ function PhasesSection() {
       <ConfirmDialog
         open={duplicateConfirm}
         onOpenChange={setDuplicateConfirm}
-        title={`Phase ${pendingPhase?.number} 重複`}
-        description={`Phase ${pendingPhase?.number} は既に存在します。上書きしますか？`}
+        title={t('gtm.phases.duplicateTitle', { number: pendingPhase?.number })}
+        description={t('gtm.phases.duplicateDescription', { number: pendingPhase?.number })}
         onConfirm={handleDuplicateConfirm}
         confirmVariant="default"
       />
@@ -482,7 +482,7 @@ function KPIsSection() {
               </div>
             </div>
             <div className="flex justify-end gap-2">
-              <Button variant="outline" size="sm" onClick={() => setAdding(false)}>{t('common.cancel')}</Button>
+              <Button variant="outline" size="sm" onClick={() => { setAdding(false); setErrors({ metric: '', target: '' }) }}>{t('common.cancel')}</Button>
               <Button size="sm" onClick={handleAdd} disabled={!form.metric.trim() || !form.target.trim()}>{t('common.add')}</Button>
             </div>
           </div>
