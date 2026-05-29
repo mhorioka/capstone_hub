@@ -86,7 +86,7 @@ function CompetitorSection() {
               </div>
             </div>
             <div className="flex justify-end gap-2">
-              <Button variant="outline" size="sm" onClick={() => setAdding(false)}>{t('common.cancel')}</Button>
+              <Button variant="outline" size="sm" onClick={() => { setAdding(false); setError('') }}>{t('common.cancel')}</Button>
               <Button size="sm" onClick={handleAdd} disabled={!form.name.trim()}>{t('common.add')}</Button>
             </div>
           </div>
@@ -367,7 +367,7 @@ function SwotQuadrant({
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); handleAdd() } }}
         />
-        <Button size="sm" className="h-7 px-2 text-xs" onClick={handleAdd}>
+        <Button size="sm" className="h-7 px-2 text-xs" onClick={handleAdd} disabled={!input.trim()}>
           {t('competitive.swot.addItem')}
         </Button>
       </div>
