@@ -20,6 +20,7 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
 import type { Competitor } from '@/types/models'
+import { INPUT_MAX } from '@/lib/constants'
 
 // ─── Competitor Profiles ──────────────────────────────────────
 
@@ -59,6 +60,7 @@ function CompetitorSection() {
                 <Label>{t('competitive.competitors.name')} <span className="text-red-500">*</span></Label>
                 <Input
                   placeholder={t('competitive.competitors.namePlaceholder')}
+                  maxLength={INPUT_MAX.SHORT}
                   value={form.name}
                   onChange={(e) => { setForm((f) => ({ ...f, name: e.target.value })); setError('') }}
                 />
@@ -66,23 +68,23 @@ function CompetitorSection() {
               </div>
               <div className="space-y-1.5">
                 <Label>{t('competitive.competitors.marketShare')}</Label>
-                <Input placeholder={t('competitive.competitors.marketSharePlaceholder')} value={form.marketShare} onChange={(e) => setForm((f) => ({ ...f, marketShare: e.target.value }))} />
+                <Input placeholder={t('competitive.competitors.marketSharePlaceholder')} maxLength={INPUT_MAX.SHORT} value={form.marketShare} onChange={(e) => setForm((f) => ({ ...f, marketShare: e.target.value }))} />
               </div>
               <div className="space-y-1.5">
                 <Label>{t('competitive.competitors.priceRange')}</Label>
-                <Input placeholder={t('competitive.competitors.priceRangePlaceholder')} value={form.priceRange} onChange={(e) => setForm((f) => ({ ...f, priceRange: e.target.value }))} />
+                <Input placeholder={t('competitive.competitors.priceRangePlaceholder')} maxLength={INPUT_MAX.SHORT} value={form.priceRange} onChange={(e) => setForm((f) => ({ ...f, priceRange: e.target.value }))} />
               </div>
               <div className="space-y-1.5">
                 <Label>{t('competitive.competitors.strengths')}</Label>
-                <Textarea placeholder={t('competitive.competitors.strengthsPlaceholder')} value={form.strengths} onChange={(e) => setForm((f) => ({ ...f, strengths: e.target.value }))} />
+                <Textarea placeholder={t('competitive.competitors.strengthsPlaceholder')} maxLength={INPUT_MAX.LONG} value={form.strengths} onChange={(e) => setForm((f) => ({ ...f, strengths: e.target.value }))} />
               </div>
               <div className="space-y-1.5">
                 <Label>{t('competitive.competitors.weaknesses')}</Label>
-                <Textarea placeholder={t('competitive.competitors.weaknessesPlaceholder')} value={form.weaknesses} onChange={(e) => setForm((f) => ({ ...f, weaknesses: e.target.value }))} />
+                <Textarea placeholder={t('competitive.competitors.weaknessesPlaceholder')} maxLength={INPUT_MAX.LONG} value={form.weaknesses} onChange={(e) => setForm((f) => ({ ...f, weaknesses: e.target.value }))} />
               </div>
               <div className="col-span-2 space-y-1.5">
                 <Label>{t('competitive.competitors.productLines')}</Label>
-                <Textarea placeholder={t('competitive.competitors.productLinesPlaceholder')} value={form.productLines} onChange={(e) => setForm((f) => ({ ...f, productLines: e.target.value }))} />
+                <Textarea placeholder={t('competitive.competitors.productLinesPlaceholder')} maxLength={INPUT_MAX.LONG} value={form.productLines} onChange={(e) => setForm((f) => ({ ...f, productLines: e.target.value }))} />
               </div>
             </div>
             <div className="flex justify-end gap-2">
@@ -103,27 +105,27 @@ function CompetitorSection() {
                 <div className="grid grid-cols-2 gap-3">
                   <div className="col-span-2 space-y-1.5">
                     <Label>{t('competitive.competitors.name')}</Label>
-                    <Input value={comp.name} onChange={(e) => dispatch({ type: 'UPDATE_COMPETITOR', payload: { id: comp.id, data: { name: e.target.value } } })} />
+                    <Input maxLength={INPUT_MAX.SHORT} value={comp.name} onChange={(e) => dispatch({ type: 'UPDATE_COMPETITOR', payload: { id: comp.id, data: { name: e.target.value } } })} />
                   </div>
                   <div className="space-y-1.5">
                     <Label>{t('competitive.competitors.marketShare')}</Label>
-                    <Input value={comp.marketShare} onChange={(e) => dispatch({ type: 'UPDATE_COMPETITOR', payload: { id: comp.id, data: { marketShare: e.target.value } } })} />
+                    <Input maxLength={INPUT_MAX.SHORT} value={comp.marketShare} onChange={(e) => dispatch({ type: 'UPDATE_COMPETITOR', payload: { id: comp.id, data: { marketShare: e.target.value } } })} />
                   </div>
                   <div className="space-y-1.5">
                     <Label>{t('competitive.competitors.priceRange')}</Label>
-                    <Input value={comp.priceRange} onChange={(e) => dispatch({ type: 'UPDATE_COMPETITOR', payload: { id: comp.id, data: { priceRange: e.target.value } } })} />
+                    <Input maxLength={INPUT_MAX.SHORT} value={comp.priceRange} onChange={(e) => dispatch({ type: 'UPDATE_COMPETITOR', payload: { id: comp.id, data: { priceRange: e.target.value } } })} />
                   </div>
                   <div className="space-y-1.5">
                     <Label>{t('competitive.competitors.strengths')}</Label>
-                    <Textarea value={comp.strengths} onChange={(e) => dispatch({ type: 'UPDATE_COMPETITOR', payload: { id: comp.id, data: { strengths: e.target.value } } })} />
+                    <Textarea maxLength={INPUT_MAX.LONG} value={comp.strengths} onChange={(e) => dispatch({ type: 'UPDATE_COMPETITOR', payload: { id: comp.id, data: { strengths: e.target.value } } })} />
                   </div>
                   <div className="space-y-1.5">
                     <Label>{t('competitive.competitors.weaknesses')}</Label>
-                    <Textarea value={comp.weaknesses} onChange={(e) => dispatch({ type: 'UPDATE_COMPETITOR', payload: { id: comp.id, data: { weaknesses: e.target.value } } })} />
+                    <Textarea maxLength={INPUT_MAX.LONG} value={comp.weaknesses} onChange={(e) => dispatch({ type: 'UPDATE_COMPETITOR', payload: { id: comp.id, data: { weaknesses: e.target.value } } })} />
                   </div>
                   <div className="col-span-2 space-y-1.5">
                     <Label>{t('competitive.competitors.productLines')}</Label>
-                    <Textarea value={comp.productLines} onChange={(e) => dispatch({ type: 'UPDATE_COMPETITOR', payload: { id: comp.id, data: { productLines: e.target.value } } })} />
+                    <Textarea maxLength={INPUT_MAX.LONG} value={comp.productLines} onChange={(e) => dispatch({ type: 'UPDATE_COMPETITOR', payload: { id: comp.id, data: { productLines: e.target.value } } })} />
                   </div>
                 </div>
                 <Button size="sm" variant="outline" onClick={() => setEditingId(null)}>{t('common.close')}</Button>
@@ -194,6 +196,7 @@ function PositioningMapSection() {
             <Label>{t('competitive.positioningMap.xAxisLabel')}</Label>
             <Input
               placeholder={t('competitive.positioningMap.xAxisPlaceholder')}
+              maxLength={INPUT_MAX.SHORT}
               value={positioningMap.xAxisLabel}
               onChange={(e) => dispatch({ type: 'UPDATE_POSITIONING_MAP', payload: { xAxisLabel: e.target.value } })}
             />
@@ -202,6 +205,7 @@ function PositioningMapSection() {
             <Label>{t('competitive.positioningMap.yAxisLabel')}</Label>
             <Input
               placeholder={t('competitive.positioningMap.yAxisPlaceholder')}
+              maxLength={INPUT_MAX.SHORT}
               value={positioningMap.yAxisLabel}
               onChange={(e) => dispatch({ type: 'UPDATE_POSITIONING_MAP', payload: { yAxisLabel: e.target.value } })}
             />
@@ -363,6 +367,7 @@ function SwotQuadrant({
         <Input
           className="h-7 text-xs"
           placeholder={t('competitive.swot.placeholder')}
+          maxLength={INPUT_MAX.MEDIUM}
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); handleAdd() } }}
@@ -389,6 +394,7 @@ function DifferentiatorsSection() {
       <CardContent>
         <Textarea
           placeholder={t('competitive.differentiators.placeholder')}
+          maxLength={INPUT_MAX.LONG}
           value={state.project.competitiveAnalysis.differentiators}
           rows={4}
           onChange={(e) => dispatch({ type: 'UPDATE_DIFFERENTIATORS', payload: { value: e.target.value } })}

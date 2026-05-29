@@ -44,13 +44,33 @@ export interface IProjectRepository {
   projectExists(id: string): boolean;
 }
 
+// ─── Security Helpers ─────────────────────────────────────────
+
+const DANGEROUS_KEYS = new Set(['__proto__', 'constructor', 'prototype']);
+
+function stripDangerousKeys(value: unknown): unknown {
+  if (value === null || typeof value !== 'object') return value;
+  if (Array.isArray(value)) return value.map(stripDangerousKeys);
+  const cleaned: Record<string, unknown> = {};
+  for (const [k, v] of Object.entries(value as Record<string, unknown>)) {
+    if (!DANGEROUS_KEYS.has(k)) {
+      cleaned[k] = stripDangerousKeys(v);
+    }
+  }
+  return cleaned;
+}
+
+function safeParse<T>(raw: string): T {
+  return stripDangerousKeys(JSON.parse(raw)) as T;
+}
+
 // ─── localStorage Implementation ─────────────────────────────
 
 export class LocalStorageProjectRepository implements IProjectRepository {
   private getIndex(): string[] {
     try {
       const raw = localStorage.getItem(STORAGE_KEYS.PROJECTS_INDEX);
-      return raw ? (JSON.parse(raw) as string[]) : [];
+      return raw ? safeParse<string[]>(raw) : [];
     } catch {
       return [];
     }
@@ -103,7 +123,7 @@ export class LocalStorageProjectRepository implements IProjectRepository {
     try {
       const raw = localStorage.getItem(STORAGE_KEYS.PROJECT(id));
       if (!raw) return { ok: false, error: `Project ${id} not found` };
-      return { ok: true, data: JSON.parse(raw) as Project };
+      return { ok: true, data: safeParse<Project>(raw) };
     } catch (e) {
       return { ok: false, error: String(e) };
     }
