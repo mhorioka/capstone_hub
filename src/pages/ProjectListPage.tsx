@@ -11,6 +11,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import type { Project } from '@/types/models'
+import { INPUT_MAX } from '@/lib/constants'
 
 const EMPTY_MARKET_RESEARCH = {
   status: 'empty' as const,
@@ -105,6 +106,7 @@ export function ProjectListPage() {
                     <Input
                       id="proj-name"
                       placeholder={t('project.create.namePlaceholder')}
+                      maxLength={INPUT_MAX.SHORT}
                       value={form.name}
                       onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))}
                     />
@@ -116,6 +118,7 @@ export function ProjectListPage() {
                     <Input
                       id="proj-market"
                       placeholder={t('project.create.targetMarketPlaceholder')}
+                      maxLength={INPUT_MAX.SHORT}
                       value={form.targetMarket}
                       onChange={(e) => setForm((f) => ({ ...f, targetMarket: e.target.value }))}
                     />
@@ -127,6 +130,7 @@ export function ProjectListPage() {
                     <Input
                       id="proj-category"
                       placeholder={t('project.create.foodCategoryPlaceholder')}
+                      maxLength={INPUT_MAX.SHORT}
                       value={form.foodCategory}
                       onChange={(e) => setForm((f) => ({ ...f, foodCategory: e.target.value }))}
                     />

@@ -10,6 +10,7 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
 import type { Persona, Initiative, Phase, PhaseNumber, KPI, Channel } from '@/types/models'
+import { INPUT_MAX } from '@/lib/constants'
 
 // ─── Personas ────────────────────────────────────────────────
 
@@ -47,6 +48,7 @@ function PersonasSection() {
                 <Label>{t('gtm.personas.name')} <span className="text-red-500">*</span></Label>
                 <Input
                   placeholder={t('gtm.personas.namePlaceholder')}
+                  maxLength={INPUT_MAX.SHORT}
                   value={form.name}
                   onChange={(e) => { setForm((f) => ({ ...f, name: e.target.value })); setError('') }}
                 />
@@ -54,19 +56,19 @@ function PersonasSection() {
               </div>
               <div className="space-y-1.5">
                 <Label>{t('gtm.personas.age')}</Label>
-                <Input placeholder={t('gtm.personas.agePlaceholder')} value={form.age} onChange={(e) => setForm((f) => ({ ...f, age: e.target.value }))} />
+                <Input placeholder={t('gtm.personas.agePlaceholder')} maxLength={INPUT_MAX.SHORT} value={form.age} onChange={(e) => setForm((f) => ({ ...f, age: e.target.value }))} />
               </div>
               <div className="space-y-1.5">
                 <Label>{t('gtm.personas.occupation')}</Label>
-                <Input placeholder={t('gtm.personas.occupationPlaceholder')} value={form.occupation} onChange={(e) => setForm((f) => ({ ...f, occupation: e.target.value }))} />
+                <Input placeholder={t('gtm.personas.occupationPlaceholder')} maxLength={INPUT_MAX.SHORT} value={form.occupation} onChange={(e) => setForm((f) => ({ ...f, occupation: e.target.value }))} />
               </div>
               <div className="space-y-1.5">
                 <Label>{t('gtm.personas.painPoints')}</Label>
-                <Textarea placeholder={t('gtm.personas.painPointsPlaceholder')} value={form.painPoints} onChange={(e) => setForm((f) => ({ ...f, painPoints: e.target.value }))} />
+                <Textarea placeholder={t('gtm.personas.painPointsPlaceholder')} maxLength={INPUT_MAX.LONG} value={form.painPoints} onChange={(e) => setForm((f) => ({ ...f, painPoints: e.target.value }))} />
               </div>
               <div className="space-y-1.5">
                 <Label>{t('gtm.personas.goals')}</Label>
-                <Textarea placeholder={t('gtm.personas.goalsPlaceholder')} value={form.goals} onChange={(e) => setForm((f) => ({ ...f, goals: e.target.value }))} />
+                <Textarea placeholder={t('gtm.personas.goalsPlaceholder')} maxLength={INPUT_MAX.LONG} value={form.goals} onChange={(e) => setForm((f) => ({ ...f, goals: e.target.value }))} />
               </div>
             </div>
             <div className="flex justify-end gap-2">
@@ -83,11 +85,11 @@ function PersonasSection() {
             <div key={persona.id} className="rounded-md border border-slate-200 p-4">
               {editingId === persona.id ? (
                 <div className="space-y-2">
-                  <Input value={persona.name} onChange={(e) => dispatch({ type: 'UPDATE_PERSONA', payload: { id: persona.id, data: { name: e.target.value } } })} />
-                  <Input placeholder={t('gtm.personas.agePlaceholder')} value={persona.age} onChange={(e) => dispatch({ type: 'UPDATE_PERSONA', payload: { id: persona.id, data: { age: e.target.value } } })} />
-                  <Input placeholder={t('gtm.personas.occupationPlaceholder')} value={persona.occupation} onChange={(e) => dispatch({ type: 'UPDATE_PERSONA', payload: { id: persona.id, data: { occupation: e.target.value } } })} />
-                  <Textarea placeholder={t('gtm.personas.painPointsPlaceholder')} value={persona.painPoints} onChange={(e) => dispatch({ type: 'UPDATE_PERSONA', payload: { id: persona.id, data: { painPoints: e.target.value } } })} />
-                  <Textarea placeholder={t('gtm.personas.goalsPlaceholder')} value={persona.goals} onChange={(e) => dispatch({ type: 'UPDATE_PERSONA', payload: { id: persona.id, data: { goals: e.target.value } } })} />
+                  <Input maxLength={INPUT_MAX.SHORT} value={persona.name} onChange={(e) => dispatch({ type: 'UPDATE_PERSONA', payload: { id: persona.id, data: { name: e.target.value } } })} />
+                  <Input placeholder={t('gtm.personas.agePlaceholder')} maxLength={INPUT_MAX.SHORT} value={persona.age} onChange={(e) => dispatch({ type: 'UPDATE_PERSONA', payload: { id: persona.id, data: { age: e.target.value } } })} />
+                  <Input placeholder={t('gtm.personas.occupationPlaceholder')} maxLength={INPUT_MAX.SHORT} value={persona.occupation} onChange={(e) => dispatch({ type: 'UPDATE_PERSONA', payload: { id: persona.id, data: { occupation: e.target.value } } })} />
+                  <Textarea placeholder={t('gtm.personas.painPointsPlaceholder')} maxLength={INPUT_MAX.LONG} value={persona.painPoints} onChange={(e) => dispatch({ type: 'UPDATE_PERSONA', payload: { id: persona.id, data: { painPoints: e.target.value } } })} />
+                  <Textarea placeholder={t('gtm.personas.goalsPlaceholder')} maxLength={INPUT_MAX.LONG} value={persona.goals} onChange={(e) => dispatch({ type: 'UPDATE_PERSONA', payload: { id: persona.id, data: { goals: e.target.value } } })} />
                   <Button size="sm" variant="outline" onClick={() => setEditingId(null)}>{t('common.close')}</Button>
                 </div>
               ) : (
@@ -158,6 +160,7 @@ function EntryStrategySection() {
           <Textarea
             id="pricing"
             placeholder={t('gtm.entryStrategy.pricingStrategyPlaceholder')}
+            maxLength={INPUT_MAX.LONG}
             value={entryStrategy.pricingStrategy}
             rows={3}
             onChange={(e) => dispatch({ type: 'UPDATE_ENTRY_STRATEGY', payload: { pricingStrategy: e.target.value } })}
@@ -202,16 +205,16 @@ function InitiativesSection() {
             <div className="grid grid-cols-2 gap-3">
               <div className="col-span-2 space-y-1.5">
                 <Label>{t('gtm.initiatives.titleField')} <span className="text-red-500">*</span></Label>
-                <Input placeholder={t('gtm.initiatives.titlePlaceholder')} value={form.title} onChange={(e) => { setForm((f) => ({ ...f, title: e.target.value })); setError('') }} />
+                <Input placeholder={t('gtm.initiatives.titlePlaceholder')} maxLength={INPUT_MAX.SHORT} value={form.title} onChange={(e) => { setForm((f) => ({ ...f, title: e.target.value })); setError('') }} />
                 {error && <p className="text-xs text-red-500">{error}</p>}
               </div>
               <div className="col-span-2 space-y-1.5">
                 <Label>{t('gtm.initiatives.description')}</Label>
-                <Textarea placeholder={t('gtm.initiatives.descriptionPlaceholder')} value={form.description} onChange={(e) => setForm((f) => ({ ...f, description: e.target.value }))} />
+                <Textarea placeholder={t('gtm.initiatives.descriptionPlaceholder')} maxLength={INPUT_MAX.LONG} value={form.description} onChange={(e) => setForm((f) => ({ ...f, description: e.target.value }))} />
               </div>
               <div className="space-y-1.5">
                 <Label>{t('gtm.initiatives.owner')}</Label>
-                <Input placeholder={t('gtm.initiatives.ownerPlaceholder')} value={form.owner} onChange={(e) => setForm((f) => ({ ...f, owner: e.target.value }))} />
+                <Input placeholder={t('gtm.initiatives.ownerPlaceholder')} maxLength={INPUT_MAX.SHORT} value={form.owner} onChange={(e) => setForm((f) => ({ ...f, owner: e.target.value }))} />
               </div>
               <div className="space-y-1.5">
                 <Label>{t('gtm.initiatives.dueDate')}</Label>
@@ -243,10 +246,10 @@ function InitiativesSection() {
                   {editingId === init.id ? (
                     <td colSpan={4} className="py-3">
                       <div className="space-y-2">
-                        <Input value={init.title} onChange={(e) => dispatch({ type: 'UPDATE_INITIATIVE', payload: { id: init.id, data: { title: e.target.value } } })} />
-                        <Textarea value={init.description} onChange={(e) => dispatch({ type: 'UPDATE_INITIATIVE', payload: { id: init.id, data: { description: e.target.value } } })} />
+                        <Input maxLength={INPUT_MAX.SHORT} value={init.title} onChange={(e) => dispatch({ type: 'UPDATE_INITIATIVE', payload: { id: init.id, data: { title: e.target.value } } })} />
+                        <Textarea maxLength={INPUT_MAX.LONG} value={init.description} onChange={(e) => dispatch({ type: 'UPDATE_INITIATIVE', payload: { id: init.id, data: { description: e.target.value } } })} />
                         <div className="flex gap-2">
-                          <Input value={init.owner} placeholder={t('gtm.initiatives.ownerPlaceholder')} onChange={(e) => dispatch({ type: 'UPDATE_INITIATIVE', payload: { id: init.id, data: { owner: e.target.value } } })} />
+                          <Input maxLength={INPUT_MAX.SHORT} value={init.owner} placeholder={t('gtm.initiatives.ownerPlaceholder')} onChange={(e) => dispatch({ type: 'UPDATE_INITIATIVE', payload: { id: init.id, data: { owner: e.target.value } } })} />
                           <Input type="date" value={init.dueDate} onChange={(e) => dispatch({ type: 'UPDATE_INITIATIVE', payload: { id: init.id, data: { dueDate: e.target.value } } })} />
                         </div>
                         <Button size="sm" variant="outline" onClick={() => setEditingId(null)}>{t('common.close')}</Button>
@@ -355,6 +358,7 @@ function PhasesSection() {
                 <Label>{t('gtm.phases.milestone')} <span className="text-red-500">*</span></Label>
                 <Input
                   placeholder={t('gtm.phases.milestonePlaceholder')}
+                  maxLength={INPUT_MAX.MEDIUM}
                   value={form.milestone}
                   onChange={(e) => { setForm((f) => ({ ...f, milestone: e.target.value })); setErrors((er) => ({ ...er, milestone: '' })) }}
                 />
@@ -371,7 +375,7 @@ function PhasesSection() {
               {errors.date && <p className="col-span-3 text-xs text-red-500">{errors.date}</p>}
               <div className="col-span-3 space-y-1.5">
                 <Label>{t('gtm.phases.goals')}</Label>
-                <Textarea placeholder={t('gtm.phases.goalsPlaceholder')} value={form.goals} onChange={(e) => setForm((f) => ({ ...f, goals: e.target.value }))} />
+                <Textarea placeholder={t('gtm.phases.goalsPlaceholder')} maxLength={INPUT_MAX.LONG} value={form.goals} onChange={(e) => setForm((f) => ({ ...f, goals: e.target.value }))} />
               </div>
             </div>
             <div className="flex justify-end gap-2">
@@ -387,12 +391,12 @@ function PhasesSection() {
           <div key={phase.id} className="rounded-md border border-slate-200 p-4">
             {editingId === phase.id ? (
               <div className="space-y-2">
-                <Input placeholder={t('gtm.phases.milestonePlaceholder')} value={phase.milestone} onChange={(e) => dispatch({ type: 'UPDATE_PHASE', payload: { id: phase.id, data: { milestone: e.target.value } } })} />
+                <Input placeholder={t('gtm.phases.milestonePlaceholder')} maxLength={INPUT_MAX.MEDIUM} value={phase.milestone} onChange={(e) => dispatch({ type: 'UPDATE_PHASE', payload: { id: phase.id, data: { milestone: e.target.value } } })} />
                 <div className="flex gap-2">
                   <Input type="date" value={phase.startDate} onChange={(e) => dispatch({ type: 'UPDATE_PHASE', payload: { id: phase.id, data: { startDate: e.target.value } } })} />
                   <Input type="date" value={phase.endDate} onChange={(e) => dispatch({ type: 'UPDATE_PHASE', payload: { id: phase.id, data: { endDate: e.target.value } } })} />
                 </div>
-                <Textarea placeholder={t('gtm.phases.goalsPlaceholder')} value={phase.goals} onChange={(e) => dispatch({ type: 'UPDATE_PHASE', payload: { id: phase.id, data: { goals: e.target.value } } })} />
+                <Textarea placeholder={t('gtm.phases.goalsPlaceholder')} maxLength={INPUT_MAX.LONG} value={phase.goals} onChange={(e) => dispatch({ type: 'UPDATE_PHASE', payload: { id: phase.id, data: { goals: e.target.value } } })} />
                 <Button size="sm" variant="outline" onClick={() => setEditingId(null)}>{t('common.close')}</Button>
               </div>
             ) : (
@@ -468,17 +472,17 @@ function KPIsSection() {
             <div className="grid grid-cols-2 gap-3">
               <div className="space-y-1.5">
                 <Label>{t('gtm.kpis.metric')} <span className="text-red-500">*</span></Label>
-                <Input placeholder={t('gtm.kpis.metricPlaceholder')} value={form.metric} onChange={(e) => { setForm((f) => ({ ...f, metric: e.target.value })); setErrors((er) => ({ ...er, metric: '' })) }} />
+                <Input placeholder={t('gtm.kpis.metricPlaceholder')} maxLength={INPUT_MAX.SHORT} value={form.metric} onChange={(e) => { setForm((f) => ({ ...f, metric: e.target.value })); setErrors((er) => ({ ...er, metric: '' })) }} />
                 {errors.metric && <p className="text-xs text-red-500">{errors.metric}</p>}
               </div>
               <div className="space-y-1.5">
                 <Label>{t('gtm.kpis.target')} <span className="text-red-500">*</span></Label>
-                <Input placeholder={t('gtm.kpis.targetPlaceholder')} value={form.target} onChange={(e) => { setForm((f) => ({ ...f, target: e.target.value })); setErrors((er) => ({ ...er, target: '' })) }} />
+                <Input placeholder={t('gtm.kpis.targetPlaceholder')} maxLength={INPUT_MAX.SHORT} value={form.target} onChange={(e) => { setForm((f) => ({ ...f, target: e.target.value })); setErrors((er) => ({ ...er, target: '' })) }} />
                 {errors.target && <p className="text-xs text-red-500">{errors.target}</p>}
               </div>
               <div className="col-span-2 space-y-1.5">
                 <Label>{t('gtm.kpis.measurementMethod')}</Label>
-                <Input placeholder={t('gtm.kpis.measurementMethodPlaceholder')} value={form.measurementMethod} onChange={(e) => setForm((f) => ({ ...f, measurementMethod: e.target.value }))} />
+                <Input placeholder={t('gtm.kpis.measurementMethodPlaceholder')} maxLength={INPUT_MAX.MEDIUM} value={form.measurementMethod} onChange={(e) => setForm((f) => ({ ...f, measurementMethod: e.target.value }))} />
               </div>
             </div>
             <div className="flex justify-end gap-2">
@@ -507,10 +511,10 @@ function KPIsSection() {
                     <td colSpan={4} className="py-3">
                       <div className="space-y-2">
                         <div className="flex gap-2">
-                          <Input value={kpi.metric} onChange={(e) => dispatch({ type: 'UPDATE_KPI', payload: { id: kpi.id, data: { metric: e.target.value } } })} />
-                          <Input value={kpi.target} onChange={(e) => dispatch({ type: 'UPDATE_KPI', payload: { id: kpi.id, data: { target: e.target.value } } })} />
+                          <Input maxLength={INPUT_MAX.SHORT} value={kpi.metric} onChange={(e) => dispatch({ type: 'UPDATE_KPI', payload: { id: kpi.id, data: { metric: e.target.value } } })} />
+                          <Input maxLength={INPUT_MAX.SHORT} value={kpi.target} onChange={(e) => dispatch({ type: 'UPDATE_KPI', payload: { id: kpi.id, data: { target: e.target.value } } })} />
                         </div>
-                        <Input value={kpi.measurementMethod} onChange={(e) => dispatch({ type: 'UPDATE_KPI', payload: { id: kpi.id, data: { measurementMethod: e.target.value } } })} />
+                        <Input maxLength={INPUT_MAX.MEDIUM} value={kpi.measurementMethod} onChange={(e) => dispatch({ type: 'UPDATE_KPI', payload: { id: kpi.id, data: { measurementMethod: e.target.value } } })} />
                         <Button size="sm" variant="outline" onClick={() => setEditingId(null)}>{t('common.close')}</Button>
                       </div>
                     </td>

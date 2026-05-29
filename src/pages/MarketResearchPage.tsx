@@ -10,6 +10,7 @@ import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import type { Segment, ConsumerInsight, Barrier, BarrierType, Trend } from '@/types/models'
+import { INPUT_MAX } from '@/lib/constants'
 
 // ─── Section: Market Overview ─────────────────────────────────
 
@@ -29,6 +30,7 @@ function MarketOverviewSection() {
           <Input
             id="market-size"
             placeholder={t('market.overview.marketSizePlaceholder')}
+            maxLength={INPUT_MAX.SHORT}
             value={overview.marketSize}
             onChange={(e) =>
               dispatch({ type: 'UPDATE_MARKET_OVERVIEW', payload: { marketSize: e.target.value } })
@@ -40,6 +42,7 @@ function MarketOverviewSection() {
           <Input
             id="cagr"
             placeholder={t('market.overview.cagrPlaceholder')}
+            maxLength={INPUT_MAX.SHORT}
             value={overview.cagr}
             onChange={(e) =>
               dispatch({ type: 'UPDATE_MARKET_OVERVIEW', payload: { cagr: e.target.value } })
@@ -51,6 +54,7 @@ function MarketOverviewSection() {
           <Textarea
             id="definition"
             placeholder={t('market.overview.definitionPlaceholder')}
+            maxLength={INPUT_MAX.LONG}
             value={overview.definition}
             rows={3}
             onChange={(e) =>
@@ -106,6 +110,7 @@ function SegmentsSection() {
               <Label>{t('market.segments.name')} <span className="text-red-500">*</span></Label>
               <Input
                 placeholder={t('market.segments.namePlaceholder')}
+                maxLength={INPUT_MAX.SHORT}
                 value={form.name}
                 onChange={(e) => { setForm((f) => ({ ...f, name: e.target.value })); setError('') }}
               />
@@ -115,6 +120,7 @@ function SegmentsSection() {
               <Label>{t('market.segments.size')}</Label>
               <Input
                 placeholder={t('market.segments.sizePlaceholder')}
+                maxLength={INPUT_MAX.SHORT}
                 value={form.size}
                 onChange={(e) => setForm((f) => ({ ...f, size: e.target.value }))}
               />
@@ -123,6 +129,7 @@ function SegmentsSection() {
               <Label>{t('market.segments.characteristics')}</Label>
               <Textarea
                 placeholder={t('market.segments.characteristicsPlaceholder')}
+                maxLength={INPUT_MAX.LONG}
                 value={form.characteristics}
                 onChange={(e) => setForm((f) => ({ ...f, characteristics: e.target.value }))}
               />
@@ -147,6 +154,7 @@ function SegmentsSection() {
                 <div className="space-y-1.5">
                   <Label>{t('market.segments.name')}</Label>
                   <Input
+                    maxLength={INPUT_MAX.SHORT}
                     value={segment.name}
                     onChange={(e) => handleUpdate(segment.id, { name: e.target.value })}
                   />
@@ -154,6 +162,7 @@ function SegmentsSection() {
                 <div className="space-y-1.5">
                   <Label>{t('market.segments.size')}</Label>
                   <Input
+                    maxLength={INPUT_MAX.SHORT}
                     value={segment.size}
                     onChange={(e) => handleUpdate(segment.id, { size: e.target.value })}
                   />
@@ -161,6 +170,7 @@ function SegmentsSection() {
                 <div className="space-y-1.5">
                   <Label>{t('market.segments.characteristics')}</Label>
                   <Textarea
+                    maxLength={INPUT_MAX.LONG}
                     value={segment.characteristics}
                     onChange={(e) => handleUpdate(segment.id, { characteristics: e.target.value })}
                   />
@@ -245,6 +255,7 @@ function ConsumerInsightsSection() {
               <Label>{t('market.insights.source')} <span className="text-red-500">*</span></Label>
               <Input
                 placeholder={t('market.insights.sourcePlaceholder')}
+                maxLength={INPUT_MAX.SHORT}
                 value={form.source}
                 onChange={(e) => { setForm((f) => ({ ...f, source: e.target.value })); setErrors((er) => ({ ...er, source: '' })) }}
               />
@@ -254,6 +265,7 @@ function ConsumerInsightsSection() {
               <Label>{t('market.insights.notes')} <span className="text-red-500">*</span></Label>
               <Textarea
                 placeholder={t('market.insights.notesPlaceholder')}
+                maxLength={INPUT_MAX.LONG}
                 value={form.notes}
                 onChange={(e) => { setForm((f) => ({ ...f, notes: e.target.value })); setErrors((er) => ({ ...er, notes: '' })) }}
               />
@@ -284,6 +296,7 @@ function ConsumerInsightsSection() {
                 <div className="space-y-1.5">
                   <Label>{t('market.insights.source')}</Label>
                   <Input
+                    maxLength={INPUT_MAX.SHORT}
                     value={insight.source}
                     onChange={(e) => dispatch({ type: 'UPDATE_CONSUMER_INSIGHT', payload: { id: insight.id, data: { source: e.target.value } } })}
                   />
@@ -291,6 +304,7 @@ function ConsumerInsightsSection() {
                 <div className="space-y-1.5">
                   <Label>{t('market.insights.notes')}</Label>
                   <Textarea
+                    maxLength={INPUT_MAX.LONG}
                     value={insight.notes}
                     onChange={(e) => dispatch({ type: 'UPDATE_CONSUMER_INSIGHT', payload: { id: insight.id, data: { notes: e.target.value } } })}
                   />
@@ -382,6 +396,7 @@ function BarriersSection() {
               <Label>{t('market.barriers.description')} <span className="text-red-500">*</span></Label>
               <Textarea
                 placeholder={t('market.barriers.descriptionPlaceholder')}
+                maxLength={INPUT_MAX.LONG}
                 value={form.description}
                 onChange={(e) => { setForm((f) => ({ ...f, description: e.target.value })); setError('') }}
               />
@@ -458,6 +473,7 @@ function TrendsSection() {
               <Label>{t('market.trends.titleField')} <span className="text-red-500">*</span></Label>
               <Input
                 placeholder={t('market.trends.titlePlaceholder')}
+                maxLength={INPUT_MAX.SHORT}
                 value={form.title}
                 onChange={(e) => { setForm((f) => ({ ...f, title: e.target.value })); setError('') }}
               />
@@ -467,6 +483,7 @@ function TrendsSection() {
               <Label>{t('market.trends.description')}</Label>
               <Textarea
                 placeholder={t('market.trends.descriptionPlaceholder')}
+                maxLength={INPUT_MAX.LONG}
                 value={form.description}
                 onChange={(e) => setForm((f) => ({ ...f, description: e.target.value }))}
               />
@@ -486,10 +503,12 @@ function TrendsSection() {
             {editingId === trend.id ? (
               <div className="space-y-3">
                 <Input
+                  maxLength={INPUT_MAX.SHORT}
                   value={trend.title}
                   onChange={(e) => dispatch({ type: 'UPDATE_TREND', payload: { id: trend.id, data: { title: e.target.value } } })}
                 />
                 <Textarea
+                  maxLength={INPUT_MAX.LONG}
                   value={trend.description}
                   onChange={(e) => dispatch({ type: 'UPDATE_TREND', payload: { id: trend.id, data: { description: e.target.value } } })}
                 />
